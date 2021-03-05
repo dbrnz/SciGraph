@@ -219,10 +219,14 @@ logger.info("   ArrayList: " + v.getClass().getSimpleName());
       }
       generator.writeEndArray();
     } else if (value.getClass().isArray()) {
+logger.info("  Array...");
+/*
       Object[] objects = (Object[]) value;
       for (Object o : objects) {
 logger.info("  Array element: " + o.getClass().getSimpleName());
       }
+*/
+/*
 {
       List<String> arr = Arrays.asList((String[]) value);
       generator.writeArrayFieldStart(fieldName);
@@ -232,7 +236,7 @@ logger.info("           Value: " + v);
       }
       generator.writeEndArray();
 }
-
+*/
     } else {
       throw new IllegalArgumentException("Don't know how to serialize " + value.getClass());
     }
