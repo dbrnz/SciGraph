@@ -147,6 +147,7 @@ logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + v
   // TODO similar to ResultSerializer.java from golrLoader
   private void resultSerializer(JsonGenerator generator, String fieldName, Object value)
       throws IOException {
+logger.info("Serialise: " + fieldName + ": " + value.getClass().getSimpleName() + " " + value.toString());
     if (value instanceof Node) {
       Node n = (Node) value;
 
