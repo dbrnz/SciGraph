@@ -201,7 +201,10 @@ logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + v
       }
       generator.writeEndArray();
     } else if (value.getClass().isArray()) {
-logger.info("       Array: " + Arrays.toString(value));
+      Object[] objects = (Object[]) value;
+      for (Object o : objects) {
+logger.info("       Array: " + o.getClass().getSimpleName() + " " + o.toString());
+      }
 {
       List<String> arr = Arrays.asList((String[]) value);
       generator.writeArrayFieldStart(fieldName);
