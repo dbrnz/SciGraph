@@ -118,14 +118,20 @@ logger.info("QUERY EXECUTION...");
           StringWriter writer = new StringWriter();
           JsonGenerator generator = new JsonFactory().createGenerator(writer);
           generator.writeStartArray();
+
+
           while (result.hasNext()) {
             Map<String, Object> row = result.next();
             generator.writeStartObject();
             for (Entry<String, Object> entry : row.entrySet()) {
               String key = entry.getKey();
               Object value = entry.getValue();
+
+
 logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + value.toString());
               resultSerializer(generator, key, value);
+
+
             }
             generator.writeEndObject();
           }
@@ -195,6 +201,16 @@ logger.info("Serialise: " + fieldName + ": " + value.getClass().getSimpleName() 
       generator.writeNumberField(fieldName, (Float) value);
     } else if (value instanceof Double) {
       generator.writeNumberField(fieldName, (Double) value);
+
+   } else if (value instanceof ArrayList) {
+      generator.writeArrayFieldStart(fieldName);
+      for (Object v : (ArrayList<?>) value) {
+logger.info("   ArrayList: " + v.getClass().getSimpleName());
+        generator.writeString(v.toString());
+      }
+      generator.writeEndArray();
+    }
+/*
     } else if (value instanceof Iterable) {
       generator.writeArrayFieldStart(fieldName);
       for (String v : (List<String>) value) {
@@ -215,6 +231,7 @@ logger.info("           Value: " + v);
       }
       generator.writeEndArray();
 }
+*/
     } else {
       throw new IllegalArgumentException("Don't know how to serialize " + value.getClass());
     }
