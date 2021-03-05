@@ -202,7 +202,7 @@ logger.info("Serialise: " + fieldName + ": " + value.getClass().getSimpleName() 
       generator.writeNumberField(fieldName, (Float) value);
     } else if (value instanceof Double) {
       generator.writeNumberField(fieldName, (Double) value);
-
+/*
    } else if (value instanceof ArrayList) {
       generator.writeArrayFieldStart(fieldName);
       for (Object v : (ArrayList<?>) value) {
@@ -210,8 +210,8 @@ logger.info("   ArrayList: " + v.getClass().getSimpleName());
         generator.writeString(v.toString());
       }
       generator.writeEndArray();
+*/
 
-/*
     } else if (value instanceof Iterable) {
       generator.writeArrayFieldStart(fieldName);
       for (String v : (List<String>) value) {
@@ -221,7 +221,7 @@ logger.info("   ArrayList: " + v.getClass().getSimpleName());
     } else if (value.getClass().isArray()) {
       Object[] objects = (Object[]) value;
       for (Object o : objects) {
-logger.info("       Array: " + o.getClass().getSimpleName() + " " + o.toString());
+logger.info("  Array element: " + o.getClass().getSimpleName());
       }
 {
       List<String> arr = Arrays.asList((String[]) value);
@@ -232,7 +232,7 @@ logger.info("           Value: " + v);
       }
       generator.writeEndArray();
 }
-*/
+
     } else {
       throw new IllegalArgumentException("Don't know how to serialize " + value.getClass());
     }
