@@ -23,6 +23,7 @@ import io.scigraph.services.jersey.JaxRsUtil;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -209,6 +210,7 @@ logger.info("   ArrayList: " + v.getClass().getSimpleName());
         generator.writeString(v.toString());
       }
       generator.writeEndArray();
+
 /*
     } else if (value instanceof Iterable) {
       generator.writeArrayFieldStart(fieldName);
