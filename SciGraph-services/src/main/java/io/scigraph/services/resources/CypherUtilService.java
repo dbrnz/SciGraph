@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
@@ -56,6 +57,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 @SwaggerDefinition(tags = {@Tag(name="cypher", description="Cypher utility services")})
 @Produces({MediaType.TEXT_PLAIN})
 public class CypherUtilService extends BaseResource {
+  static final Logger logger = Logger.getLogger(CypherUtilService.class.getName());
 
   final private CypherUtil cypherUtil;
   final private GraphDatabaseService graphDb;
@@ -112,6 +114,7 @@ public class CypherUtilService extends BaseResource {
           && JaxRsUtil.getVariant(request.get()).getMediaType() == MediaType.APPLICATION_JSON_TYPE) {
         try (Transaction tx = graphDb.beginTx()) {
           Result result = cypherUtil.execute(replacedStartCurie);
+logger.info("QUERY EXECUTION...");
           StringWriter writer = new StringWriter();
           JsonGenerator generator = new JsonFactory().createGenerator(writer);
           generator.writeStartArray();
@@ -121,6 +124,7 @@ public class CypherUtilService extends BaseResource {
             for (Entry<String, Object> entry : row.entrySet()) {
               String key = entry.getKey();
               Object value = entry.getValue();
+logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + value.toString());
               resultSerializer(generator, key, value);
             }
             generator.writeEndObject();
@@ -200,6 +204,7 @@ public class CypherUtilService extends BaseResource {
       List<String> arr = Arrays.asList((String[]) value);
       generator.writeArrayFieldStart(fieldName);
       for (String v : arr) {
+logger.info("       Value: " + v);
         generator.writeString(v);
       }
       generator.writeEndArray();
@@ -211,6 +216,7 @@ public class CypherUtilService extends BaseResource {
   private void nodeGeneration(JsonGenerator generator, Node node) throws IOException {
     generator.writeStartObject();
     for (String k : node.getPropertyKeys()) {
+logger.info("   Node: " + k + ":");
       resultSerializer(generator, k, node.getProperty(k));
     }
 
