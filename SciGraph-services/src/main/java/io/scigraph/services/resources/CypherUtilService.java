@@ -209,7 +209,6 @@ logger.info("   ArrayList: " + v.getClass().getSimpleName());
         generator.writeString(v.toString());
       }
       generator.writeEndArray();
-    }
 /*
     } else if (value instanceof Iterable) {
       generator.writeArrayFieldStart(fieldName);
