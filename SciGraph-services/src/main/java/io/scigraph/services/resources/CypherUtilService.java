@@ -201,13 +201,16 @@ logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + v
       }
       generator.writeEndArray();
     } else if (value.getClass().isArray()) {
+logger.info("       Array: " + Arrays.toString(value));
+{
       List<String> arr = Arrays.asList((String[]) value);
       generator.writeArrayFieldStart(fieldName);
       for (String v : arr) {
-logger.info("       Value: " + v);
+logger.info("           Value: " + v);
         generator.writeString(v);
       }
       generator.writeEndArray();
+}
     } else {
       throw new IllegalArgumentException("Don't know how to serialize " + value.getClass());
     }
