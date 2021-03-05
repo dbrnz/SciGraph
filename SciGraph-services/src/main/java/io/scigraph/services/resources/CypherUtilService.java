@@ -127,12 +127,10 @@ logger.info("QUERY EXECUTION...");
             for (Entry<String, Object> entry : row.entrySet()) {
               String key = entry.getKey();
               Object value = entry.getValue();
-
-
+              if (null != value) {
 logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + value.toString());
-              resultSerializer(generator, key, value);
-
-
+                resultSerializer(generator, key, value);
+              }
             }
             generator.writeEndObject();
           }
@@ -154,7 +152,7 @@ logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + v
   // TODO similar to ResultSerializer.java from golrLoader
   private void resultSerializer(JsonGenerator generator, String fieldName, Object value)
       throws IOException {
-logger.info("Serialise: " + fieldName + ": " + value.getClass().getSimpleName() + " " + value.toString());
+logger.info("Serialise: " + fieldName + ": " + value.getClass().getSimpleName());
     if (value instanceof Node) {
       Node n = (Node) value;
 
