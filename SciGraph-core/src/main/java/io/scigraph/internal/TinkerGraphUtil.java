@@ -57,7 +57,7 @@ public class TinkerGraphUtil {
   static final ImmutableSet<String> PROTECTED_PROPERTY_KEYS = ImmutableSet.of(CommonProperties.IRI, CommonProperties.CURIE);
 
   private final CurieUtil curieUtil;
-  
+
   private Graph graph;
 
   @Inject
@@ -221,7 +221,9 @@ public class TinkerGraphUtil {
         String key = entry.getKey();
         if (null == value) {
           continue;
-        } else if (value instanceof PropertyContainer) {
+        }
+logger.info("Result: " + key + ": " + value.getClass().getSimpleName() + " " + value.toString());
+        if (value instanceof PropertyContainer) {
           addElement((PropertyContainer) value);
         } else if (value instanceof Path) {
           for (PropertyContainer container : (Path) value) {
