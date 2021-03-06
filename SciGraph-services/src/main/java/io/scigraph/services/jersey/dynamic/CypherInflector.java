@@ -28,6 +28,9 @@ import io.scigraph.owlapi.curies.AddCuries;
 import io.scigraph.services.api.graph.ArrayPropertyTransformer;
 import io.scigraph.services.jersey.MultivaluedMapUtils;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -109,6 +112,11 @@ class CypherInflector implements Inflector<ContainerRequestContext, Response> {
       }
       ArrayPropertyTransformer.transform(graph);
       tx.success();
+
+try (OutputStream os = new FileOutputStream("graph.xml")) {
+    graph.io(IoCore.graphml()).writer().normalize(true).create().writeGraph(os, graph);
+}
+
       Object cacheControlNode = path.getVendorExtensions().get("x-cacheControl");
       if (cacheControlNode != null) {
           try {
