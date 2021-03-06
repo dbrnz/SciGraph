@@ -61,6 +61,8 @@ import io.scigraph.owlapi.curies.AddCuries;
 import io.scigraph.services.api.graph.ArrayPropertyTransformer;
 import io.scigraph.services.jersey.MultivaluedMapUtils;
 
+import org.apache.tinkerpop.gremlin.structure.io.IoCore;
+
 class CypherInflector implements Inflector<ContainerRequestContext, Response> {
 
   private static final Logger logger = Logger.getLogger(CypherInflector.class.getName());
