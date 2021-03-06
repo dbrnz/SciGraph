@@ -115,18 +115,17 @@ public class CypherUtilService extends BaseResource {
           && JaxRsUtil.getVariant(request.get()).getMediaType() == MediaType.APPLICATION_JSON_TYPE) {
         try (Transaction tx = graphDb.beginTx()) {
           Result result = cypherUtil.execute(replacedStartCurie);
-
+/*
       CurieUtil curieUtil = new CurieUtil(cypherUtil.getCurieMap());
       TinkerGraphUtil tgu = new TinkerGraphUtil(curieUtil);
       Graph graph = tgu.resultToGraph(result);
       tgu.setGraph(graph);
       ArrayPropertyTransformer.transform(graph);
-/*
-
+*/
           StringWriter writer = new StringWriter();
           JsonGenerator generator = new JsonFactory().createGenerator(writer);
           generator.writeStartArray();
-*/
+
 logger.info("QUERY EXECUTION...");
           while (result.hasNext()) {
             Map<String, Object> row = result.next();
